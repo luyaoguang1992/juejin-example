@@ -6,7 +6,7 @@
         <div class="page back flip"></div>
         <div class="page front p3d">
           <div class="shadow"></div>
-          <div class="card"></div>
+          <div class="card">这是贺卡</div>
         </div>
       </div>
       <!-- 左半本 -->
@@ -20,7 +20,9 @@
             solutions by email. Please let me have your comments, correctio…
           </p>
         </div>
-        <div class="page back"></div>
+        <div class="page back">
+          这是一本书
+        </div>
       </div>
     </div>
   </div>
@@ -70,7 +72,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   height: 100vh;
-  font: 100%/1.25 Arial, Helvetica, sans-serif; //字体类型
   color: #fff;
   perspective: 1000px; //必不可少！
   background: #444;
@@ -84,6 +85,8 @@ export default {
   left: 50%;
   margin-top: -150px;
   margin-left: -150px;
+  transform: rotateX(45deg);
+
 }
 
 .book .page {
@@ -96,7 +99,7 @@ export default {
   text-indent: 2em;
 }
 .book .front {
-  background-color: #d93e2b;
+  background-color: #fff;
 }
 .book .back {
   background-color: #fff;
@@ -111,7 +114,7 @@ export default {
 }
 
 .book .front-cover .back {
-  background-color: red;
+  background-color: lightblue;
   // background-image: url('https://preview.qiantucdn.com/58pic/35/01/38/55A58PICaUy8sV83Dd78m_PIC2018.jpg%21w1024_new_3072');
   background-repeat: no-repeat;
   background-size: cover;
@@ -135,7 +138,7 @@ export default {
   transform-origin: 0 100%; //设置旋转起点
 }
 .book .card {
-  background-color: red;
+  background-color: lightsalmon;
   // background: url('https://preview.qiantucdn.com/58pic/35/01/38/55A58PICaUy8sV83Dd78m_PIC2018.jpg%21w1024_new_3072');
   background-size: cover;
 }
