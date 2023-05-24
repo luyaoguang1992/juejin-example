@@ -52,6 +52,14 @@ export const routes = [
     },
     component: () => import(/* webpackChunkName: "textMove" */ '../views/text-move.vue'),
   },
+  {
+    path: '/football-field',
+    name: 'football-field',
+    meta: {
+      name: '足球场'
+    },
+    component: () => import(/* webpackChunkName: "football-field" */ '../views/football-field.vue'),
+  },
 ];
 
 const router = new VueRouter({
