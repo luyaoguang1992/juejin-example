@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import aJpg from '@/assets/a.jpg'
+import bJpg from '@/assets/b.jpg'
 window._AMapSecurityConfig = {
   securityJsCode: 'b6ccc0fa9e8c442c4c59e7f2780c31d5',
 }
@@ -14,6 +16,7 @@ export default {
     return {
       map: '',
       pathSimplifierIns: '',
+      infoWindow: '',
       path1: [
         [120.229906, 30.209333],
         [120.229496, 30.209589],
@@ -68,9 +71,12 @@ export default {
   },
   methods: {
     initMap() {
-      this.map = new AMap.Map('container')
+      this.map = new AMap.Map('container',)
+      this.infoWindow = new AMap.InfoWindow({
+        offset: new AMap.Pixel(0, 0),
+      })
       this.initPath()
-      this.bind()
+      // this.bind()
     },
     initPath() {
       AMapUI.load(['ui/misc/PathSimplifier'], (PathSimplifier) => {
@@ -101,7 +107,7 @@ export default {
           0, //关联第1条轨迹
           {
             loop: false, //循环播放
-            speed: 1000,
+            speed: 800,
             pathNavigatorStyle: {
               width: 40,
               height: 40,
@@ -115,6 +121,11 @@ export default {
                   strokeStyle: 'red',
                 },
               },
+              content: PathSimplifier.Render.Canvas.getImageContent(
+                aJpg,
+                onload,
+                onerror,
+              ),
             },
           },
         )
@@ -122,7 +133,7 @@ export default {
           1, //关联第1条轨迹
           {
             loop: false, //循环播放
-            speed: 1000,
+            speed: 800,
             pathNavigatorStyle: {
               width: 40,
               height: 40,
@@ -136,12 +147,47 @@ export default {
                   strokeStyle: 'red',
                 },
               },
+              content: PathSimplifier.Render.Canvas.getImageContent(
+                bJpg,
+                onload,
+                onerror,
+              ),
             },
           },
         )
         setTimeout(() => {
           navg0.start()
           navg1.start()
+
+          navg1.on('move', (e) => {
+            const idx = navg1.getCursor().idx // 走到了第几个点
+            const list = [
+              '不开门一直敲',
+              '是一种打扰',
+              '不回复本身',
+              '就是一种回复',
+              '双向奔赴才有意义',
+            ]
+            let text = ''
+            if(idx < 3) {
+              text = list[0]
+            } else if(idx < 8) {
+              text = list[1]
+            } else if(idx < 13) {
+              text = list[2]
+            } else if(idx < 17) {
+              text = list[3]
+            } else {
+              text = list[4]
+            }
+            const cont = `<div class="toptit">
+              <p>${text}</p>
+            </div>`
+
+            // 设置气泡
+            this.infoWindow.setContent(cont)
+            this.infoWindow.open(this.map, e.target.getPosition())
+          })
         }, 3000)
         this.pathSimplifierIns.renderLater()
       })
