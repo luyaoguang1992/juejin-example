@@ -36,6 +36,22 @@ export const routes = [
     },
     component: () => import(/* webpackChunkName: "book" */ '../views/book.vue'),
   },
+  {
+    path: '/hover-title',
+    name: 'hoverTitle',
+    meta: {
+      name: '标题hover'
+    },
+    component: () => import(/* webpackChunkName: "hoverTitle" */ '../views/hover-title.vue'),
+  },
+  {
+    path: '/text-move',
+    name: 'textMove',
+    meta: {
+      name: '文本move删除'
+    },
+    component: () => import(/* webpackChunkName: "textMove" */ '../views/text-move.vue'),
+  },
 ];
 
 const router = new VueRouter({
