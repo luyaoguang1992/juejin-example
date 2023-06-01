@@ -60,6 +60,14 @@ export const routes = [
     },
     component: () => import(/* webpackChunkName: "football-field" */ '../views/football-field.vue'),
   },
+  {
+    path: '/coin',
+    name: 'coin',
+    meta: {
+      name: '硬币'
+    },
+    component: () => import(/* webpackChunkName: "coin" */ '../views/coin.vue'),
+  },
 ];
 
 const router = new VueRouter({
